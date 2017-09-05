@@ -1,19 +1,20 @@
 #/bin/bash
 
+# wget --no-check-certificate https://fgfg163.github.io/whitelist/autoupdate.sh
 # */5 * * * * /root/autoupdate.sh
 
 basepath=$(cd $(dirname $0); pwd)
-newFile="$basepath/ss_write_ip_list.txt"
-newFileHead="$basepath/_head_ss_write_ip_list.txt"
-tmpFile="$basepath/_tmp_ss_write_ip_list.txt"
-echo $newFile
-echo $newFileHead
-echo $tmpFile
+newFile="$basepath/iplist.txt"
+logFile="$basepath/iplist.log"
 
-wget --no-check-certificate -N https://fgfg163.github.io/whitelist/iplist.txt -O $tmpFile
+wget --no-check-certificate -N https://fgfg163.github.io/whitelist/iplist.txt -o $logFile
 
-#while read line
-#do
-#    echo ${line}
-#done < "$newFile"
-
+noNewer=$(find "$logFile" | xargs grep "Server file no newer than local file")
+if [ "$noNewer" == "" ];
+then
+{
+    /etc/init.d/shadowsocks stop
+    /etc/init.d/shadowsocks start
+} &
+fi
+rm -rf $logFile
