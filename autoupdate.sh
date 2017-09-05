@@ -1,10 +1,19 @@
 #/bin/bash
-basepath=$(cd `dirname $0`; pwd)
-oldFile="$basepath/old_ss_write_ip_list.txt"
-newFile="$basepath/ss_write_ip_list.txt"
 
-rm -rf "$oldFile"
-if [ ! -f "$newFile" ]; then
-    mv "$newFile" "$oldFile"
-fi
-wget --no-check-certificate  https://fgfg163.github.io/whitelist/iplist.txt -O "$newFile"
+# */5 * * * * /root/autoupdate.sh
+
+basepath=$(cd $(dirname $0); pwd)
+newFile="$basepath/ss_write_ip_list.txt"
+newFileHead="$basepath/_head_ss_write_ip_list.txt"
+tmpFile="$basepath/_tmp_ss_write_ip_list.txt"
+echo $newFile
+echo $newFileHead
+echo $tmpFile
+
+wget --no-check-certificate -N https://fgfg163.github.io/whitelist/iplist.txt -O $tmpFile
+
+#while read line
+#do
+#    echo ${line}
+#done < "$newFile"
+
