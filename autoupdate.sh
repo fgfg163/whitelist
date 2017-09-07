@@ -7,10 +7,12 @@ basepath=$(cd $(dirname $0); pwd)
 newFile="$basepath/iplist.txt"
 logFile="$basepath/iplist.log"
 
+echo "" > $logFile
 wget --no-check-certificate -N https://fgfg163.github.io/whitelist/iplist.txt -o $logFile
 
+logFileText=$(cat $logFile)
 noNewer=$(find "$logFile" | xargs grep "Server file no newer than local file")
-if [ "$noNewer" == "" ];
+if [ "$logFileText" != "" ] && [ "$noNewer" == "" ];
 then
 {
     /etc/init.d/shadowsocks stop
