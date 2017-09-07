@@ -11,7 +11,6 @@ tmpNewFile="$basepath/iplist.txt"
 newFile="$basepath/whiteiplist.txt"
 logFile="$basepath/iplist.log"
 
-rm -rf $tmpNewFile
 echo "" > $logFile
 wget --no-check-certificate -N https://fgfg163.github.io/whitelist/iplist.txt -o $logFile
 cat $logFile
