@@ -14,7 +14,7 @@ logFile="$basepath/iplist.log"
 rm -rf $tmpNewFile
 echo "" > $logFile
 wget --no-check-certificate -N https://fgfg163.github.io/whitelist/iplist.txt -o $logFile
-
+cat $logFile
 logFileText=$(cat $logFile)
 noNewer=$(find "$logFile" | xargs grep "Server file no newer than local file")
 if [ "$logFileText" != "" ] && [ "$noNewer" == "" ];
