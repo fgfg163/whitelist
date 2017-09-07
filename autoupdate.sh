@@ -4,7 +4,8 @@
 # */5 * * * * /root/autoupdate.sh
 
 basepath=$(cd $(dirname $0); pwd)
-newFile="$basepath/iplist.txt"
+tmpNewFile="$basepath/iplist.txt"
+newFile="$basepath/whiteiplist.txt"
 logFile="$basepath/iplist.log"
 
 echo "" > $logFile
@@ -15,6 +16,7 @@ noNewer=$(find "$logFile" | xargs grep "Server file no newer than local file")
 if [ "$logFileText" != "" ] && [ "$noNewer" == "" ];
 then
 {
+    cp -rf $tmpNewFile $newFile
     /etc/init.d/shadowsocks stop
     /etc/init.d/shadowsocks start
 } &
