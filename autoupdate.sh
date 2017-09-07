@@ -3,6 +3,7 @@
 # cd /root
 # rm -rf autoupdate.sh
 # wget --no-check-certificate https://fgfg163.github.io/whitelist/autoupdate.sh
+# chmod 777 autoupdate.sh
 # */10 * * * * /root/autoupdate.sh
 
 basepath=$(cd $(dirname $0); pwd)
