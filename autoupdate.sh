@@ -19,6 +19,6 @@ noNewer=$(find "$logFile" | xargs grep "Server file no newer than local file")
 if [ "$logFileText" != "" ] && [ "$noNewer" == "" ];
 then
     cp -rf $tmpNewFile $newFile
-    /etc/init.d/shadowsocks restart
+#    /etc/init.d/shadowsocks restart
 fi
 rm -rf $logFile
