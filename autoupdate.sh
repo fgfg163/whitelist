@@ -1,13 +1,16 @@
 #/bin/bash
 
+# cd /root
+# rm -rf autoupdate.sh
 # wget --no-check-certificate https://fgfg163.github.io/whitelist/autoupdate.sh
-# */5 * * * * /root/autoupdate.sh
+# */10 * * * * /root/autoupdate.sh
 
 basepath=$(cd $(dirname $0); pwd)
 tmpNewFile="$basepath/iplist.txt"
 newFile="$basepath/whiteiplist.txt"
 logFile="$basepath/iplist.log"
 
+rm -rf $tmpNewFile
 echo "" > $logFile
 wget --no-check-certificate -N https://fgfg163.github.io/whitelist/iplist.txt -o $logFile
 
